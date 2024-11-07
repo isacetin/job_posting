@@ -4,7 +4,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 
-suspend fun <T> Flow<T>.customErrorHandler(task: (HttpException?) -> Unit) =
+fun <T> Flow<T>.customErrorHandler(task: (HttpException?) -> Unit): Flow<T> =
     flow {
         try {
             collect { value ->
@@ -12,5 +12,7 @@ suspend fun <T> Flow<T>.customErrorHandler(task: (HttpException?) -> Unit) =
             }
         } catch (e: HttpException) {
             task.invoke(e)
+        } catch (e: Exception) {
+            task.invoke(null)
         }
     }

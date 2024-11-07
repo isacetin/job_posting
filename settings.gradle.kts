@@ -14,3 +14,4 @@ pluginManagement {
 
 rootProject.name = "Jop Posting"
 include(":app")
+include(":local-preference")

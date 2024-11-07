@@ -6,5 +6,6 @@ plugins {
     id("com.google.dagger.hilt.android") version "2.52" apply false
 
     id("org.jlleitschuh.gradle.ktlint") version "12.1.1" apply false
+    alias(libs.plugins.android.library) apply false
 
 }

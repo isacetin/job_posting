@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Jop Posting</string>
+
+    <!-- Login -->
+
+    <string name="login_giris_yap">Giriş yap</string>
+    <string name="login_sosyal_medya_ile_giris_yap">Sosyal Medya İle Giriş Yap</string>
 </resources>

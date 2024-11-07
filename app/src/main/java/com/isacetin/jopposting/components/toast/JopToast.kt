@@ -1,6 +1,7 @@
 package com.isacetin.jopposting.components.toast
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -29,7 +30,8 @@ import kotlinx.coroutines.delay
 fun JobToast(
     message: String,
     duration: Int = 3000, // 3 saniye varsayılan süre
-    onDismiss: () -> Unit = {}
+    onDismiss: () -> Unit = {},
+    paddingValues: PaddingValues
 ) {
     val visible = remember { mutableStateOf(true) }
 
@@ -45,6 +47,7 @@ fun JobToast(
                 Modifier
                     .fillMaxWidth()
                     .padding(16.dp)
+                    .padding(paddingValues)
                     .clip(RoundedCornerShape(8.dp))
                     .background(Color.Black.copy(alpha = 0.8f))
                     .padding(16.dp),
@@ -68,5 +71,5 @@ fun JobToast(
 @Preview
 @Composable
 private fun JobToastPreview() {
-    JobToast("Error Error Error")
+    JobToast("Error Error Error", paddingValues = PaddingValues(16.dp))
 }

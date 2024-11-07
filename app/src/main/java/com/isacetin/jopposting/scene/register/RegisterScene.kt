@@ -23,14 +23,18 @@ import com.isacetin.jopposting.R
 import com.isacetin.jopposting.components.button.JobPrimaryButton
 import com.isacetin.jopposting.components.field.JobTextField
 import com.isacetin.jopposting.components.scaffold.JopScaffold
+import com.isacetin.jopposting.models.uistate.UiState
 import com.isacetin.jopposting.ui.theme.customTypography
 
 @Composable
-fun RegisterScene(onNavigationClick: () -> Unit) {
+fun RegisterScene(
+    onNavigationClick: () -> Unit
+) {
     val viewState = rememberRegisterViewState()
 
     JopScaffold.Main(
         onNavigationClick = onNavigationClick,
+        uiState = UiState.Error("Error"),
         content = {
             Column(
                 modifier =

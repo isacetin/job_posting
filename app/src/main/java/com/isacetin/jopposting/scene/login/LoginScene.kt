@@ -18,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -61,9 +62,9 @@ fun LoginScene(
                     painter = painterResource(id = R.drawable.login_image),
                     contentDescription = ""
                 )
-                Text(text = "Giriş Yap", style = customTypography.titleLarge)
+                Text(text = stringResource(R.string.login_giris_yap), style = customTypography.titleLarge)
 
-                Text(text = "Sosyal Medya İle Giriş Yap", style = customTypography.titleSmall)
+                Text(text = stringResource(R.string.login_sosyal_medya_ile_giris_yap), style = customTypography.titleSmall)
 
                 Row(
                     modifier =
@@ -102,15 +103,17 @@ fun LoginScene(
 
                 Text(text = "Şifremi Unuttum!", style = customTypography.bodyMedium)
 
-                JobPrimaryButton(text = "Giriş Yap", onClick = {
-                    if (viewState.isValid) {
-                        viewModel.doLogin(
-                            viewState.username.value.text,
-                            viewState.password.value.text
-                        )
-                    } else {
+                JobPrimaryButton(
+                    text = "Giriş Yap",
+                    onClick = {
+                        if (viewState.isValid) {
+                            viewModel.doLogin(
+                                viewState.username.value.text,
+                                viewState.password.value.text
+                            )
+                        }
                     }
-                })
+                )
 
                 Text(
                     modifier =

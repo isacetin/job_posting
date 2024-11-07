@@ -12,8 +12,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.ScaffoldDefaults
 import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.isacetin.jopposting.components.progressIndicator.JobProgressIndicator
@@ -24,6 +22,7 @@ import com.isacetin.jopposting.models.uistate.UiState
 object JopScaffold {
     @Composable
     fun Main(
+        uiState: UiState?,
         modifier: Modifier = Modifier,
         bottomBar: @Composable () -> Unit = {},
         content: @Composable ((PaddingValues) -> Unit),
@@ -53,7 +52,30 @@ object JopScaffold {
             containerColor = MaterialTheme.colorScheme.background,
             contentColor = contentColorFor(AlertDialogDefaults.containerColor),
             contentWindowInsets = ScaffoldDefaults.contentWindowInsets,
-            content = content
+            content = {
+                when (uiState) {
+                    is UiState.Error -> {
+                        content(it)
+                        JobToast(
+                            uiState.message,
+                            paddingValues = it
+                        )
+                    }
+
+                    UiState.Loading -> {
+                        content(it)
+                        JobProgressIndicator()
+                    }
+
+                    is UiState.Success<*> -> {
+                        content(it)
+                    }
+
+                    null -> {
+                        content(it)
+                    }
+                }
+            }
         )
     }
 
@@ -86,7 +108,10 @@ object JopScaffold {
                 when (uiState) {
                     is UiState.Error -> {
                         content(it)
-                        JobToast(uiState.message)
+                        JobToast(
+                            uiState.message,
+                            paddingValues = it
+                        )
                     }
 
                     UiState.Loading -> {
@@ -113,6 +138,7 @@ private fun JopScaffoldPreview() {
     JopScaffold.Main(
         modifier = Modifier,
         bottomBar = {},
-        content = {}
+        content = {},
+        uiState = UiState.Error("Error error")
     )
 }

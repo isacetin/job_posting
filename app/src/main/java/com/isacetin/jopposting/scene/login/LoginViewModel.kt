@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@Suppress("ktlint:standard:backing-property-naming")
 @HiltViewModel
 class LoginViewModel @Inject constructor(private val repository: AuthRepository) : ViewModel() {
     private val _uiState = MutableStateFlow<UiState?>(null)
@@ -29,7 +28,6 @@ class LoginViewModel @Inject constructor(private val repository: AuthRepository)
                     LoginRequest(password = password, username = username)
                 ).customErrorHandler { e ->
                     _uiState.value = UiState.Error(e?.message() ?: "-")
-                    println("Error : ${e?.code()}")
                 }.collect { result ->
                     _uiState.value = UiState.Success(result)
                 }
