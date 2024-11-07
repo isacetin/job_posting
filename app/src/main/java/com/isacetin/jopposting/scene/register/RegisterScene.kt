@@ -16,25 +16,29 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.isacetin.jopposting.R
 import com.isacetin.jopposting.components.button.JobPrimaryButton
 import com.isacetin.jopposting.components.field.JobTextField
 import com.isacetin.jopposting.components.scaffold.JopScaffold
-import com.isacetin.jopposting.models.uistate.UiState
 import com.isacetin.jopposting.ui.theme.customTypography
 
 @Composable
 fun RegisterScene(
-    onNavigationClick: () -> Unit
+    onNavigationClick: () -> Unit,
+    viewModel: RegisterViewModel = hiltViewModel()
 ) {
     val viewState = rememberRegisterViewState()
+    val uiState = viewModel.uiState.collectAsStateWithLifecycle()
 
     JopScaffold.Main(
         onNavigationClick = onNavigationClick,
-        uiState = UiState.Error("Error"),
+        uiState = uiState.value,
         content = {
             Column(
                 modifier =
@@ -55,12 +59,12 @@ fun RegisterScene(
                     contentDescription = ""
                 )
 
-                Text(text = "Kayıt Ol", style = customTypography.titleLarge)
+                Text(text = stringResource(R.string.register_kayit_ol), style = customTypography.titleLarge)
 
-                Text(text = "Hesap oluştur", style = customTypography.titleSmall)
+                Text(text = stringResource(R.string.register_hesap_olustur), style = customTypography.titleSmall)
 
                 JobTextField(
-                    label = "Kullanıcı Adı",
+                    label = stringResource(R.string.register_kullanici_adi),
                     value = viewState.username.value,
                     onValueChange = { value ->
                         viewState.username.value = value
@@ -68,7 +72,7 @@ fun RegisterScene(
                     validator = { value -> viewState.usernameValidateInput(value) }
                 )
                 JobTextField(
-                    label = "E-mail",
+                    label = stringResource(R.string.register_email),
                     value = viewState.email.value,
                     onValueChange = { value ->
                         viewState.email.value = value
@@ -81,7 +85,7 @@ fun RegisterScene(
                 )
 
                 JobTextField(
-                    label = "Password",
+                    label = stringResource(R.string.register_password),
                     value = viewState.password.value,
                     onValueChange = { value ->
                         viewState.password.value = value
@@ -90,18 +94,19 @@ fun RegisterScene(
                     isPasswordField = true
                 )
 
-                JobPrimaryButton(text = "Kayıt Ol", onClick = {
-                    if (viewState.isValid) {
-                    } else {
+                JobPrimaryButton(
+                    text = stringResource(R.string.register_kayit_ol),
+                    onClick = {
+
                     }
-                })
+                )
 
                 Text(
                     modifier =
                         Modifier.clickable {
                             onNavigationClick.invoke()
                         },
-                    text = "Giriş Yap",
+                    text = stringResource(R.string.register_giris_yap),
                     style = customTypography.bodyMedium
                 )
             }

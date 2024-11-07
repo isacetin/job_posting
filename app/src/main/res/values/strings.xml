@@ -1,8 +1,23 @@
 <resources>
     <string name="app_name">Jop Posting</string>
 
-    <!-- Login -->
+    <!-- Splash -->
+    <string name="splash_app_name">CodeFactory</string>
 
+    <!-- Login -->
     <string name="login_giris_yap">Giriş yap</string>
     <string name="login_sosyal_medya_ile_giris_yap">Sosyal Medya İle Giriş Yap</string>
+    <string name="login_kullanici_adi">Kullanıcı Adı</string>
+    <string name="login_sifre">Şifre</string>
+    <string name="login_sifremi_unuttum">Şifre</string>
+    <string name="login_kayit_ol">Kayıt Ol</string>
+
+    <!-- Register -->
+
+    <string name="register_kayit_ol">Kayıt Ol</string>
+    <string name="register_hesap_olustur">Hesap Oluştur</string>
+    <string name="register_kullanici_adi">Kullanıcı Adı</string>
+    <string name="register_email">E-mail</string>
+    <string name="register_password">Şifre</string>
+    <string name="register_giris_yap">Giriş Yap</string>
 </resources>

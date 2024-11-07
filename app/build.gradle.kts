@@ -101,8 +101,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.lifecycle.runtime.compose)
 
-    // Data Store
-    implementation(libs.androidx.datastore.preferences)
+    implementation(project(":local-preference"))
 }
 
 ktlint {

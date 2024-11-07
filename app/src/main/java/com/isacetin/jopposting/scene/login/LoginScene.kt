@@ -15,6 +15,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -29,17 +30,25 @@ import com.isacetin.jopposting.components.button.JobSocialButton
 import com.isacetin.jopposting.components.button.SocialButtonType
 import com.isacetin.jopposting.components.field.JobTextField
 import com.isacetin.jopposting.components.scaffold.JopScaffold
+import com.isacetin.jopposting.models.uistate.UiState
 import com.isacetin.jopposting.ui.theme.customTypography
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun LoginScene(
     viewModel: LoginViewModel = hiltViewModel(),
-    onNavigateToRegister: () -> Unit = {}
+    onNavigateToRegister: () -> Unit = {},
+    onNavigateToHome: () -> Unit = {}
 ) {
     val viewState: LoginViewState = rememberLoginViewState()
 
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
+
+    LaunchedEffect(uiState.value) {
+        if (uiState.value is UiState.Success<*>) {
+            onNavigateToHome.invoke()
+        }
+    }
 
     JopScaffold.WithoutTopBar(
         uiState = uiState.value,
@@ -83,7 +92,7 @@ fun LoginScene(
                 }
 
                 JobTextField(
-                    label = "Kullanıcı Adı",
+                    label = stringResource(R.string.login_kullanici_adi),
                     value = viewState.username.value,
                     onValueChange = {
                         viewState.username.value = it
@@ -92,7 +101,7 @@ fun LoginScene(
                 )
 
                 JobTextField(
-                    label = "Şifre",
+                    label = stringResource(R.string.login_sifre),
                     value = viewState.password.value,
                     onValueChange = {
                         viewState.password.value = it
@@ -101,10 +110,13 @@ fun LoginScene(
                     isPasswordField = true
                 )
 
-                Text(text = "Şifremi Unuttum!", style = customTypography.bodyMedium)
+                Text(
+                    text = stringResource(R.string.login_sifremi_unuttum),
+                    style = customTypography.bodyMedium
+                )
 
                 JobPrimaryButton(
-                    text = "Giriş Yap",
+                    text = stringResource(R.string.login_giris_yap),
                     onClick = {
                         if (viewState.isValid) {
                             viewModel.doLogin(
@@ -120,7 +132,7 @@ fun LoginScene(
                         Modifier.clickable {
                             onNavigateToRegister.invoke()
                         },
-                    text = "Kayıt Ol",
+                    text = stringResource(R.string.login_kayit_ol),
                     style = customTypography.bodyMedium
                 )
             }

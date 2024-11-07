@@ -9,8 +9,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.text.input.TextFieldValue
 
 class LoginViewState {
-    var username: MutableState<TextFieldValue> = mutableStateOf(TextFieldValue("asdasdasdsadas"))
-    var password: MutableState<TextFieldValue> = mutableStateOf(TextFieldValue("asdasdsadsadsad"))
+    var username: MutableState<TextFieldValue> = mutableStateOf(TextFieldValue("isacetin"))
+    var password: MutableState<TextFieldValue> = mutableStateOf(TextFieldValue("12345"))
 
     val isValid by derivedStateOf { checkInputs() }
 
@@ -24,7 +24,7 @@ class LoginViewState {
     fun passwordValidateInput(value: String): String? =
         when {
             value.isEmpty() -> "Lütfen boş bırakmayınız."
-            value.length < 6 -> "Lütfen en az 6 karakter giriniz."
+            value.length < 5 -> "Lütfen en az 5 karakter giriniz."
             else -> null
         }
 
