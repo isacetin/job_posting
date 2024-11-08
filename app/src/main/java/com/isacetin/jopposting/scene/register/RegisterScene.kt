@@ -97,7 +97,6 @@ fun RegisterScene(
                 JobPrimaryButton(
                     text = stringResource(R.string.register_kayit_ol),
                     onClick = {
-
                     }
                 )
 

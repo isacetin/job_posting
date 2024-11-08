@@ -21,8 +21,10 @@ class SplashViewModel @Inject constructor(private val userPreference: UserPrefer
         viewModelScope.launch {
             userPreference.token().collect { token ->
                 if (token.isNotBlank()) {
-                    delay(3000)
+                    delay(5000L)
                     isLogged.value = true
+                } else {
+                    isLogged.value = false
                 }
             }
         }

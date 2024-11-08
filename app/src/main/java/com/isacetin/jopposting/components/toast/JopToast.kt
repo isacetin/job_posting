@@ -29,7 +29,7 @@ import kotlinx.coroutines.delay
 @Composable
 fun JobToast(
     message: String,
-    duration: Int = 3000, // 3 saniye varsayılan süre
+    duration: Int = 3000,
     onDismiss: () -> Unit = {},
     paddingValues: PaddingValues
 ) {
