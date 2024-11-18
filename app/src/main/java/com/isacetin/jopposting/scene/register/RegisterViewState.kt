@@ -9,48 +9,58 @@ import androidx.compose.ui.text.input.TextFieldValue
 import com.isacetin.jopposting.util.isValidEmail
 
 class RegisterViewState {
-    val username = mutableStateOf(TextFieldValue(""))
-    val email = mutableStateOf(TextFieldValue(""))
-    val password = mutableStateOf(TextFieldValue(""))
+    val username = mutableStateOf(TextFieldValue("tubacetin1"))
+    val name = mutableStateOf(TextFieldValue("tuba"))
+    val surname = mutableStateOf(TextFieldValue("cetin"))
+    val email = mutableStateOf(TextFieldValue("tuba.cetin@gmail.com"))
+    val password = mutableStateOf(TextFieldValue("123456789"))
 
     val isValid by derivedStateOf { checkInputs() }
 
-    fun usernameValidateInput(value: String): String? {
-        return when {
+    fun usernameValidateInput(value: String): String? =
+        when {
             value.isEmpty() -> "Lütfen boş bırakmayınız."
             value.length < 6 -> "Lütfen en az 6 karakter giriniz."
             else -> null
         }
-    }
 
-    fun passwordValidateInput(value: String): String? {
-        return when {
+    fun passwordValidateInput(value: String): String? =
+        when {
             value.isEmpty() -> "Lütfen boş bırakmayınız."
             value.length < 6 -> "Lütfen en az 6 karakter giriniz."
             else -> null
         }
-    }
 
-    fun emailValidateInput(value: String): String? {
-        return when {
+    fun emailValidateInput(value: String): String? =
+        when {
             value.isEmpty() -> "Lütfen boş bırakmayınız."
             !value.isValidEmail() -> "Lütfen geçerli bir mail adresi giriniz."
             else -> null
         }
-    }
+
+    fun emptyValidateInput(value: String): String? =
+        when {
+            value.isEmpty() -> "Lütfen boş bırakmayınız."
+            else -> null
+        }
 
     private fun checkInputs(): Boolean {
         val userNameError = usernameValidateInput(username.value.text)
         val passwordError = passwordValidateInput(password.value.text)
         val emailError = emailValidateInput(password.value.text)
+        val nameError = emptyValidateInput(name.value.text)
+        val surnameError = emptyValidateInput(surname.value.text)
 
-        return userNameError == null && passwordError == null && emailError == null
+        return userNameError == null &&
+            passwordError == null &&
+            emailError == null &&
+            nameError == null &&
+            surnameError == null
     }
 }
 
 @Composable
-fun rememberRegisterViewState(): RegisterViewState {
-    return remember {
+fun rememberRegisterViewState(): RegisterViewState =
+    remember {
         RegisterViewState()
     }
-}

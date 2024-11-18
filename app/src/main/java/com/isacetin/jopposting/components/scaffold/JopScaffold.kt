@@ -13,16 +13,18 @@ import androidx.compose.material3.ScaffoldDefaults
 import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.isacetin.jopposting.components.progressIndicator.JobProgressIndicator
 import com.isacetin.jopposting.components.toast.JobToast
+import com.isacetin.jopposting.components.toast.ToastType
 import com.isacetin.jopposting.components.topbar.JopTopBar
 import com.isacetin.jopposting.models.uistate.UiState
 
 object JopScaffold {
     @Composable
     fun Main(
-        uiState: UiState?,
+        uiState: UiState,
         modifier: Modifier = Modifier,
         bottomBar: @Composable () -> Unit = {},
         content: @Composable ((PaddingValues) -> Unit),
@@ -56,10 +58,13 @@ object JopScaffold {
                 when (uiState) {
                     is UiState.Error -> {
                         content(it)
-                        JobToast(
-                            uiState.message,
-                            paddingValues = it
-                        )
+                        if (uiState.showToast) {
+                            JobToast(
+                                uiState.error.asString(),
+                                paddingValues = it,
+                                toastType = ToastType.ERROR
+                            )
+                        }
                     }
 
                     UiState.Loading -> {
@@ -67,13 +72,18 @@ object JopScaffold {
                         JobProgressIndicator()
                     }
 
-                    is UiState.Success<*> -> {
+                    is UiState.Loaded<*> -> {
                         content(it)
+                        if (uiState.showToast) {
+                            JobToast(
+                                stringResource(uiState.message),
+                                paddingValues = it,
+                                toastType = ToastType.SUCCESS
+                            )
+                        }
                     }
 
-                    null -> {
-                        content(it)
-                    }
+                    UiState.Empty -> content(it)
                 }
             }
         )
@@ -82,7 +92,7 @@ object JopScaffold {
     @SuppressLint("CoroutineCreationDuringComposition")
     @Composable
     fun WithoutTopBar(
-        uiState: UiState?,
+        uiState: UiState,
         modifier: Modifier = Modifier,
         bottomBar: @Composable () -> Unit = {},
         content: @Composable ((PaddingValues) -> Unit),
@@ -108,10 +118,13 @@ object JopScaffold {
                 when (uiState) {
                     is UiState.Error -> {
                         content(it)
-                        JobToast(
-                            uiState.message,
-                            paddingValues = it
-                        )
+                        if (uiState.showToast) {
+                            JobToast(
+                                uiState.error.asString(),
+                                paddingValues = it,
+                                toastType = ToastType.ERROR
+                            )
+                        }
                     }
 
                     UiState.Loading -> {
@@ -119,13 +132,17 @@ object JopScaffold {
                         JobProgressIndicator()
                     }
 
-                    is UiState.Success<*> -> {
+                    is UiState.Loaded<*> -> {
                         content(it)
+                        if (uiState.showToast) {
+                            JobToast(
+                                stringResource(uiState.message),
+                                paddingValues = it,
+                                toastType = ToastType.SUCCESS
+                            )
+                        }
                     }
-
-                    null -> {
-                        content(it)
-                    }
+                    UiState.Empty -> content(it)
                 }
             }
         )
@@ -139,6 +156,6 @@ private fun JopScaffoldPreview() {
         modifier = Modifier,
         bottomBar = {},
         content = {},
-        uiState = UiState.Error("Error error")
+        uiState = UiState.Empty
     )
 }

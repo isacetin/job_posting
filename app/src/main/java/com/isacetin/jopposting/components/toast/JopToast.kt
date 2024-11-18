@@ -1,6 +1,7 @@
 package com.isacetin.jopposting.components.toast
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -8,9 +9,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
@@ -31,7 +31,8 @@ fun JobToast(
     message: String,
     duration: Int = 3000,
     onDismiss: () -> Unit = {},
-    paddingValues: PaddingValues
+    paddingValues: PaddingValues,
+    toastType: ToastType
 ) {
     val visible = remember { mutableStateOf(true) }
 
@@ -48,17 +49,24 @@ fun JobToast(
                     .fillMaxWidth()
                     .padding(16.dp)
                     .padding(paddingValues)
-                    .clip(RoundedCornerShape(8.dp))
-                    .background(Color.Black.copy(alpha = 0.8f))
+                    .clip(RoundedCornerShape(3.dp))
+                    .background(toastType.color)
                     .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Icon(
-                Icons.Default.Close,
-                contentDescription = "",
-                tint = Color.Red,
-                modifier = Modifier.size(24.dp)
-            )
+            Box(
+                modifier = Modifier.clip(CircleShape)
+            ) {
+                Icon(
+                    toastType.icon,
+                    contentDescription = "",
+                    tint = toastType.color,
+                    modifier =
+                        Modifier
+                            .size(24.dp)
+                            .background(Color.White)
+                )
+            }
             Spacer(modifier = Modifier.width(8.dp))
             Text(
                 text = message,
@@ -70,6 +78,40 @@ fun JobToast(
 
 @Preview
 @Composable
-private fun JobToastPreview() {
-    JobToast("Error Error Error", paddingValues = PaddingValues(16.dp))
+private fun JobToastPreviewError() {
+    JobToast(
+        "Error Error Error",
+        paddingValues = PaddingValues(16.dp),
+        toastType = ToastType.ERROR
+    )
+}
+
+@Preview
+@Composable
+private fun JobToastPreviewSuccess() {
+    JobToast(
+        "Success Success Success",
+        paddingValues = PaddingValues(16.dp),
+        toastType = ToastType.SUCCESS
+    )
+}
+
+@Preview
+@Composable
+private fun JobToastPreviewWarning() {
+    JobToast(
+        "Warning Warning Warning",
+        paddingValues = PaddingValues(16.dp),
+        toastType = ToastType.WARNING
+    )
+}
+
+@Preview
+@Composable
+private fun JobToastPreviewInfo() {
+    JobToast(
+        "Info Info Info",
+        paddingValues = PaddingValues(16.dp),
+        toastType = ToastType.INFO
+    )
 }

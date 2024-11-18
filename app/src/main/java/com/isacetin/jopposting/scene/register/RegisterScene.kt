@@ -26,6 +26,7 @@ import com.isacetin.jopposting.R
 import com.isacetin.jopposting.components.button.JobPrimaryButton
 import com.isacetin.jopposting.components.field.JobTextField
 import com.isacetin.jopposting.components.scaffold.JopScaffold
+import com.isacetin.jopposting.models.register.RegisterRequest
 import com.isacetin.jopposting.ui.theme.customTypography
 
 @Composable
@@ -47,7 +48,7 @@ fun RegisterScene(
                         .verticalScroll(rememberScrollState())
                         .fillMaxSize()
                         .padding(16.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Image(
@@ -70,6 +71,22 @@ fun RegisterScene(
                         viewState.username.value = value
                     },
                     validator = { value -> viewState.usernameValidateInput(value) }
+                )
+                JobTextField(
+                    label = stringResource(R.string.register_name),
+                    value = viewState.name.value,
+                    onValueChange = { value ->
+                        viewState.name.value = value
+                    },
+                    validator = { value -> viewState.emptyValidateInput(value) }
+                )
+                JobTextField(
+                    label = stringResource(R.string.register_lastName),
+                    value = viewState.surname.value,
+                    onValueChange = { value ->
+                        viewState.surname.value = value
+                    },
+                    validator = { value -> viewState.emptyValidateInput(value) }
                 )
                 JobTextField(
                     label = stringResource(R.string.register_email),
@@ -97,6 +114,15 @@ fun RegisterScene(
                 JobPrimaryButton(
                     text = stringResource(R.string.register_kayit_ol),
                     onClick = {
+                        viewModel.register(
+                            RegisterRequest(
+                                email = viewState.email.value.text,
+                                firstName = viewState.name.value.text,
+                                lastName = viewState.surname.value.text,
+                                login = viewState.username.value.text,
+                                password = viewState.password.value.text
+                            )
+                        )
                     }
                 )
 

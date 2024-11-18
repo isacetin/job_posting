@@ -80,7 +80,7 @@ fun JobTextField(
 
         errorMessage?.let {
             Text(
-                modifier = Modifier.padding(top = 2.dp),
+                modifier = Modifier.padding(start = 3.dp, top = 2.dp),
                 text = it,
                 style = customTypography.labelMedium,
                 color = Error

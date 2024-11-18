@@ -45,7 +45,7 @@ fun LoginScene(
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
 
     LaunchedEffect(uiState.value) {
-        if (uiState.value is UiState.Success<*>) {
+        if (uiState.value is UiState.Loaded<*>) {
             onNavigateToHome.invoke()
         }
     }
@@ -130,6 +130,7 @@ fun LoginScene(
                 Text(
                     modifier =
                         Modifier.clickable {
+                            viewModel.resetState()
                             onNavigateToRegister.invoke()
                         },
                     text = stringResource(R.string.login_kayit_ol),

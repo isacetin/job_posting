@@ -4,6 +4,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 
+//  Deprecated
 fun <T> Flow<T>.customErrorHandler(task: (HttpException?) -> Unit) =
     flow {
         try {
