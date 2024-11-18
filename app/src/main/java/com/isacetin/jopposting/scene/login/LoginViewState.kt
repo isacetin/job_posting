@@ -9,8 +9,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.text.input.TextFieldValue
 
 class LoginViewState {
-    var username: MutableState<TextFieldValue> = mutableStateOf(TextFieldValue("isacetin"))
-    var password: MutableState<TextFieldValue> = mutableStateOf(TextFieldValue("12345"))
+    var username: MutableState<TextFieldValue> = mutableStateOf(TextFieldValue(""))
+    var password: MutableState<TextFieldValue> = mutableStateOf(TextFieldValue(""))
 
     val isValid by derivedStateOf { checkInputs() }
 

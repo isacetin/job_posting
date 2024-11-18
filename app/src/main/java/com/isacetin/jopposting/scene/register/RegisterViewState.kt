@@ -9,11 +9,11 @@ import androidx.compose.ui.text.input.TextFieldValue
 import com.isacetin.jopposting.util.isValidEmail
 
 class RegisterViewState {
-    val username = mutableStateOf(TextFieldValue("tubacetin1"))
-    val name = mutableStateOf(TextFieldValue("tuba"))
-    val surname = mutableStateOf(TextFieldValue("cetin"))
-    val email = mutableStateOf(TextFieldValue("tuba.cetin@gmail.com"))
-    val password = mutableStateOf(TextFieldValue("123456789"))
+    val username = mutableStateOf(TextFieldValue(""))
+    val name = mutableStateOf(TextFieldValue(""))
+    val surname = mutableStateOf(TextFieldValue(""))
+    val email = mutableStateOf(TextFieldValue(""))
+    val password = mutableStateOf(TextFieldValue(""))
 
     val isValid by derivedStateOf { checkInputs() }
 
