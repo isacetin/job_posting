@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -47,7 +48,7 @@ fun RegisterScene(
                         .padding(it)
                         .verticalScroll(rememberScrollState())
                         .fillMaxSize()
-                        .padding(16.dp),
+                        .padding(horizontal = 16.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -64,6 +65,7 @@ fun RegisterScene(
 
                 Text(text = stringResource(R.string.register_hesap_olustur), style = customTypography.titleSmall)
 
+                Spacer(modifier = Modifier.height(3.dp))
                 JobTextField(
                     label = stringResource(R.string.register_kullanici_adi),
                     value = viewState.username.value,
@@ -126,6 +128,8 @@ fun RegisterScene(
                     }
                 )
 
+                Spacer(modifier = Modifier.height(3.dp))
+
                 Text(
                     modifier =
                         Modifier.clickable {
@@ -134,6 +138,7 @@ fun RegisterScene(
                     text = stringResource(R.string.register_giris_yap),
                     style = customTypography.bodyMedium
                 )
+                Spacer(modifier = Modifier.height(5.dp))
             }
         }
     )

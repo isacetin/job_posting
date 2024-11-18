@@ -13,6 +13,7 @@ import androidx.compose.material3.ScaffoldDefaults
 import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.isacetin.jopposting.components.progressIndicator.JobProgressIndicator
@@ -51,8 +52,7 @@ object JopScaffold {
             snackbarHost = {},
             floatingActionButton = {},
             floatingActionButtonPosition = FabPosition.End,
-            containerColor = MaterialTheme.colorScheme.background,
-            contentColor = contentColorFor(AlertDialogDefaults.containerColor),
+            containerColor = Color.White,
             contentWindowInsets = ScaffoldDefaults.contentWindowInsets,
             content = {
                 when (uiState) {
@@ -111,8 +111,7 @@ object JopScaffold {
             snackbarHost = {},
             floatingActionButton = {},
             floatingActionButtonPosition = FabPosition.End,
-            containerColor = MaterialTheme.colorScheme.background,
-            contentColor = contentColorFor(AlertDialogDefaults.containerColor),
+            containerColor = Color.White,
             contentWindowInsets = ScaffoldDefaults.contentWindowInsets,
             content = {
                 when (uiState) {
@@ -142,6 +141,7 @@ object JopScaffold {
                             )
                         }
                     }
+
                     UiState.Empty -> content(it)
                 }
             }
