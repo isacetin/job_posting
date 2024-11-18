@@ -5,12 +5,9 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.AlertDialogDefaults
 import androidx.compose.material3.FabPosition
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.ScaffoldDefaults
-import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,7 +19,7 @@ import com.isacetin.jopposting.components.toast.ToastType
 import com.isacetin.jopposting.components.topbar.JopTopBar
 import com.isacetin.jopposting.models.uistate.UiState
 
-object JopScaffold {
+object JobScaffold {
     @Composable
     fun Main(
         uiState: UiState,
@@ -152,7 +149,7 @@ object JopScaffold {
 @Composable
 @Preview(showBackground = true, showSystemUi = true)
 private fun JopScaffoldPreview() {
-    JopScaffold.Main(
+    JobScaffold.Main(
         modifier = Modifier,
         bottomBar = {},
         content = {},

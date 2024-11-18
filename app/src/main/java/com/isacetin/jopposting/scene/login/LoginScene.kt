@@ -29,8 +29,9 @@ import com.isacetin.jopposting.components.button.JobPrimaryButton
 import com.isacetin.jopposting.components.button.JobSocialButton
 import com.isacetin.jopposting.components.button.SocialButtonType
 import com.isacetin.jopposting.components.field.JobTextField
-import com.isacetin.jopposting.components.scaffold.JopScaffold
+import com.isacetin.jopposting.components.scaffold.JobScaffold
 import com.isacetin.jopposting.models.uistate.UiState
+import com.isacetin.jopposting.ui.theme.DarkGray
 import com.isacetin.jopposting.ui.theme.customTypography
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -50,7 +51,7 @@ fun LoginScene(
         }
     }
 
-    JopScaffold.WithoutTopBar(
+    JobScaffold.WithoutTopBar(
         uiState = uiState.value,
         content = { paddingValues ->
             Column(
@@ -112,7 +113,10 @@ fun LoginScene(
 
                 Text(
                     text = stringResource(R.string.login_sifremi_unuttum),
-                    style = customTypography.bodyMedium
+                    style =
+                        customTypography.bodyMedium.copy(
+                            color = DarkGray
+                        )
                 )
 
                 JobPrimaryButton(
@@ -134,7 +138,10 @@ fun LoginScene(
                             onNavigateToRegister.invoke()
                         },
                     text = stringResource(R.string.login_kayit_ol),
-                    style = customTypography.bodyMedium
+                    style =
+                        customTypography.bodyMedium.copy(
+                            color = DarkGray
+                        )
                 )
             }
         }

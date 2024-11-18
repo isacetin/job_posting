@@ -26,8 +26,9 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.isacetin.jopposting.R
 import com.isacetin.jopposting.components.button.JobPrimaryButton
 import com.isacetin.jopposting.components.field.JobTextField
-import com.isacetin.jopposting.components.scaffold.JopScaffold
+import com.isacetin.jopposting.components.scaffold.JobScaffold
 import com.isacetin.jopposting.models.register.RegisterRequest
+import com.isacetin.jopposting.ui.theme.DarkGray
 import com.isacetin.jopposting.ui.theme.customTypography
 
 @Composable
@@ -38,7 +39,7 @@ fun RegisterScene(
     val viewState = rememberRegisterViewState()
     val uiState = viewModel.uiState.collectAsStateWithLifecycle()
 
-    JopScaffold.Main(
+    JobScaffold.Main(
         onNavigationClick = onNavigationClick,
         uiState = uiState.value,
         content = {
@@ -63,7 +64,13 @@ fun RegisterScene(
 
                 Text(text = stringResource(R.string.register_kayit_ol), style = customTypography.titleLarge)
 
-                Text(text = stringResource(R.string.register_hesap_olustur), style = customTypography.titleSmall)
+                Text(
+                    text = stringResource(R.string.register_hesap_olustur),
+                    style =
+                        customTypography.titleSmall.copy(
+                            color = DarkGray
+                        )
+                )
 
                 Spacer(modifier = Modifier.height(3.dp))
                 JobTextField(
@@ -136,7 +143,10 @@ fun RegisterScene(
                             onNavigationClick.invoke()
                         },
                     text = stringResource(R.string.register_giris_yap),
-                    style = customTypography.bodyMedium
+                    style =
+                        customTypography.bodyMedium.copy(
+                            color = DarkGray
+                        )
                 )
                 Spacer(modifier = Modifier.height(5.dp))
             }

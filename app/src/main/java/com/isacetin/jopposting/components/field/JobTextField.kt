@@ -28,6 +28,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.isacetin.jopposting.R
+import com.isacetin.jopposting.ui.theme.Dark
 import com.isacetin.jopposting.ui.theme.DarkGray
 import com.isacetin.jopposting.ui.theme.Error
 import com.isacetin.jopposting.ui.theme.Gray
@@ -90,6 +91,9 @@ fun JobTextField(
             isError = errorMessage != null,
             colors =
                 TextFieldDefaults.colors().copy(
+                    disabledPlaceholderColor = DarkGray,
+                    focusedPlaceholderColor = DarkGray,
+                    unfocusedPlaceholderColor = DarkGray,
                     cursorColor = Color.Black,
                     disabledLabelColor = Color.White,
                     focusedIndicatorColor = Color.Transparent,
