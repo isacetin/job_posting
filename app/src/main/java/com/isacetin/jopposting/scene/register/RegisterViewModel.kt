@@ -1,7 +1,7 @@
 package com.isacetin.jopposting.scene.register
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.isacetin.jopposting.models.BaseViewModel
 import com.isacetin.jopposting.models.register.RegisterRequest
 import com.isacetin.jopposting.models.uistate.Resource
 import com.isacetin.jopposting.models.uistate.UiState
@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class RegisterViewModel @Inject constructor(private val repository: AuthRepository) : ViewModel() {
+class RegisterViewModel @Inject constructor(private val repository: AuthRepository) : BaseViewModel() {
     private val _uiState = MutableStateFlow<UiState>(UiState.Empty)
     val uiState = _uiState.asStateFlow()
 
@@ -34,5 +34,9 @@ class RegisterViewModel @Inject constructor(private val repository: AuthReposito
                     }
                 }
         }
+    }
+
+    override fun resetState() {
+        _uiState.value = UiState.Empty
     }
 }
