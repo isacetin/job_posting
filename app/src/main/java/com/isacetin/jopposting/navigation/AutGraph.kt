@@ -2,7 +2,7 @@ package com.isacetin.jopposting.navigation
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
-import com.isacetin.jopposting.scene.home.navigateHome
+import com.isacetin.jopposting.scene.dashboard.navigateToDashboard
 import com.isacetin.jopposting.scene.login.LOGIN
 import com.isacetin.jopposting.scene.login.login
 import com.isacetin.jopposting.scene.login.navigateLogin
@@ -15,7 +15,7 @@ fun NavGraphBuilder.authGraph(navController: NavController) {
     splash(
         navigateToHome = {
             navController.popBackStack(SPLASH, true)
-            navController.navigateHome()
+            navController.navigateToDashboard()
         },
         navigateToLogin = {
             navController.popBackStack(SPLASH, true)
@@ -29,7 +29,7 @@ fun NavGraphBuilder.authGraph(navController: NavController) {
         },
         onNavigateToHome = {
             navController.popBackStack(LOGIN, true)
-            navController.navigateHome()
+            navController.navigateToDashboard()
         }
     )
 
