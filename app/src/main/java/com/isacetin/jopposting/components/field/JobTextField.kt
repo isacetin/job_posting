@@ -41,10 +41,12 @@ fun JobTextField(
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     validator: (String) -> String? = { _ -> null },
-    isPasswordField: Boolean = false
+    isPasswordField: Boolean = false,
+    trailingIcon: @Composable (() -> Unit)? = null
 ) {
     var errorMessage by remember { mutableStateOf<String?>(null) }
-    var isPasswordVisible by remember { mutableStateOf<Boolean>(isPasswordField) }
+    var isPasswordVisible by remember { mutableStateOf(isPasswordField) }
+
     Column(
         modifier = Modifier.fillMaxWidth()
     ) {
@@ -58,34 +60,26 @@ fun JobTextField(
                     ),
             value = value,
             onValueChange = {
-                onValueChange.invoke(it)
-                errorMessage = validator.invoke(it.text)
+                onValueChange(it)
+                errorMessage = validator(it.text)
             },
             placeholder = { Text(text = label, style = customTypography.titleSmall) },
             keyboardActions = keyboardActions,
             keyboardOptions = keyboardOptions,
             trailingIcon = {
                 if (isPasswordField) {
-                    IconButton(onClick = { isPasswordVisible = !isPasswordVisible }) {
-                        Icon(
-                            painter =
-                                if (isPasswordVisible) {
-                                    painterResource(id = R.drawable.password_icons)
-                                } else {
-                                    painterResource(
-                                        id = R.drawable.password_icons_visible
-                                    )
-                                },
-                            contentDescription = ""
-                        )
+                    PasswordVisibilityToggle(isPasswordVisible) {
+                        isPasswordVisible = !isPasswordVisible
                     }
+                } else {
+                    trailingIcon?.invoke()
                 }
             },
             visualTransformation =
-                if (!isPasswordVisible) {
-                    VisualTransformation.None
-                } else {
+                if (isPasswordVisible) {
                     PasswordVisualTransformation()
+                } else {
+                    VisualTransformation.None
                 },
             isError = errorMessage != null,
             colors =
@@ -119,6 +113,19 @@ fun JobTextField(
     }
 }
 
+@Composable
+fun PasswordVisibilityToggle(isPasswordVisible: Boolean, onToggleVisibility: () -> Unit) {
+    IconButton(onClick = onToggleVisibility) {
+        Icon(
+            painter =
+                painterResource(
+                    id = if (isPasswordVisible) R.drawable.password_icons else R.drawable.password_icons_visible
+                ),
+            contentDescription = "Toggle Password Visibility"
+        )
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 private fun JobTextFieldPreview() {
@@ -126,8 +133,6 @@ private fun JobTextFieldPreview() {
         label = "Username",
         value = TextFieldValue(""),
         onValueChange = {},
-        validator = {
-            null
-        }
+        validator = { null }
     )
 }

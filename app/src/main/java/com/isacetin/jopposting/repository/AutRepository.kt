@@ -1,5 +1,6 @@
 package com.isacetin.jopposting.repository
 
+import com.isacetin.jopposting.models.home.User
 import com.isacetin.jopposting.models.login.LoginRequest
 import com.isacetin.jopposting.models.login.LoginResponse
 import com.isacetin.jopposting.models.register.RegisterRequest
@@ -14,6 +15,8 @@ interface AuthRepository {
     suspend fun authenticate(request: LoginRequest): Flow<Resource<LoginResponse>>
 
     suspend fun register(request: RegisterRequest): Flow<Resource<RegisterResponse>>
+
+    suspend fun getUser(): Flow<Resource<User>>
 }
 
 class AutRepositoryImpl @Inject constructor(private val service: AuthService) : AuthRepository {
@@ -25,5 +28,10 @@ class AutRepositoryImpl @Inject constructor(private val service: AuthService) : 
     override suspend fun register(request: RegisterRequest): Flow<Resource<RegisterResponse>> =
         flow {
             emit(Resource.Success(service.register(request)))
+        }
+
+    override suspend fun getUser(): Flow<Resource<User>> =
+        flow {
+            emit(Resource.Success(service.getUser()))
         }
 }

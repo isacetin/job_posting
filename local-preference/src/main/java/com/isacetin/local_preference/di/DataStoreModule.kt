@@ -8,6 +8,7 @@ import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.preferencesDataStoreFile
+import com.isacetin.local_preference.data.UserDataStore
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -33,4 +34,10 @@ object DataStoreModule {
             migrations = listOf(SharedPreferencesMigration(appContext, USER_PREFERENCES)),
             produceFile = { appContext.preferencesDataStoreFile(USER_PREFERENCES) }
         )
+
+    @Singleton
+    @Provides
+    fun provideUserDataStore(
+        dataStore: DataStore<Preferences>
+    ): UserDataStore = UserDataStore(dataStore)
 }

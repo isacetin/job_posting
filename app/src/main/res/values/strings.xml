@@ -29,4 +29,7 @@
     <string name="register_lastName">Soyisim</string>
     <string name="register_password">Şifre</string>
     <string name="register_giris_yap">Giriş Yap</string>
+
+    <!--Home -->
+    <string name="home_hello">Merhaba,</string>
 </resources>
