@@ -1,7 +1,7 @@
 package com.isacetin.jopposting.scene.home
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.isacetin.jopposting.models.BaseViewModel
 import com.isacetin.jopposting.models.home.User
 import com.isacetin.jopposting.models.uistate.Resource
 import com.isacetin.jopposting.models.uistate.UiState
@@ -18,7 +18,7 @@ import javax.inject.Inject
 
 @Suppress("ktlint:standard:backing-property-naming")
 @HiltViewModel
-class HomeViewModel @Inject constructor(private val repository: AuthRepository) : ViewModel() {
+class HomeViewModel @Inject constructor(private val repository: AuthRepository) : BaseViewModel() {
     private val _uiState = MutableStateFlow<UiState>(UiState.Empty)
     val uiState: StateFlow<UiState>
         get() = _uiState.asStateFlow()
@@ -31,7 +31,7 @@ class HomeViewModel @Inject constructor(private val repository: AuthRepository) 
         getUser()
     }
 
-    private fun getUser() =
+    internal fun getUser() =
         viewModelScope.launch {
             _uiState.value = UiState.Loading
             repository
@@ -48,4 +48,8 @@ class HomeViewModel @Inject constructor(private val repository: AuthRepository) 
                     }
                 }
         }
+
+    override fun resetState() {
+        _uiState.value = UiState.Empty
+    }
 }

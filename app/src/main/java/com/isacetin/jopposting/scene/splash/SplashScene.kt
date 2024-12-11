@@ -33,6 +33,11 @@ fun SplashScene(
         navigateToLogin.invoke()
     }
 
+    SplashSceneContent()
+}
+
+@Composable
+private fun SplashSceneContent() {
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -56,5 +61,5 @@ fun SplashScene(
 @Preview(showBackground = true)
 @Composable
 private fun SplashScenePreview() {
-    SplashScene()
+    SplashSceneContent()
 }

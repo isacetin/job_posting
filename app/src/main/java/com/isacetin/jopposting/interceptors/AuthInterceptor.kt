@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.Response
+import javax.net.ssl.HttpsURLConnection
 
 class AuthInterceptor @Inject constructor(private val dataStore: UserDataStore) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
@@ -21,6 +22,14 @@ class AuthInterceptor @Inject constructor(private val dataStore: UserDataStore) 
         }
 
         val newRequest = currentRequest.build()
-        return chain.proceed(newRequest)
+        val response = chain.proceed(newRequest)
+
+        if (response.code == HttpsURLConnection.HTTP_UNAUTHORIZED) {
+            runBlocking {
+                dataStore.saveToken("")
+            }
+        }
+
+        return response
     }
 }
