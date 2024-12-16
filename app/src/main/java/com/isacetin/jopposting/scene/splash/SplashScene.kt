@@ -23,13 +23,17 @@ import com.isacetin.jopposting.ui.theme.customTypography
 fun SplashScene(
     viewModel: SplashViewModel = hiltViewModel(),
     navigateToHome: () -> Unit = {},
-    navigateToLogin: () -> Unit = {}
+    navigateToLogin: () -> Unit = {},
+    navigateToOnboarding: () -> Unit
 ) {
     val isLoggedIn = viewModel.isLogged
+    val isFirstLaunch: Boolean = viewModel.isFirstLaunch.value
 
-    if (isLoggedIn.value == true) {
+    if (isFirstLaunch && isLoggedIn.value == false) {
+        navigateToOnboarding.invoke()
+    } else if (isLoggedIn.value == true && !isFirstLaunch) {
         navigateToHome.invoke()
-    } else if (isLoggedIn.value == false) {
+    } else if (isLoggedIn.value == false && !isFirstLaunch) {
         navigateToLogin.invoke()
     }
 

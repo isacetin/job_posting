@@ -28,7 +28,7 @@ fun JobPrimaryButton(
                     .fillMaxWidth()
                     .height(54.dp)
             ),
-        shape = RoundedCornerShape(8.dp),
+        shape = RoundedCornerShape(16.dp),
         colors =
             ButtonDefaults.buttonColors(
                 containerColor = Primary

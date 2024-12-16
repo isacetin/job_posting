@@ -12,6 +12,17 @@
     <!-- Splash -->
     <string name="splash_app_name">CodeFactory</string>
 
+    <!-- Onboarding -->
+    <string name="onboarding_first_title">Learn anytime and anywhere</string>
+    <string name="onboarding_first_description">Quarantine is the perfect time to spend your day learning something new, from anywhere!</string>
+    <string name="onboarding_secondary_title">Find a course for you</string>
+    <string name="onboarding_secondary_description">Quarantine is the perfect time to spend your day learning something new, from anywhere!</string>
+    <string name="onboarding_third_title">Improve your skills</string>
+    <string name="onboarding_third_description">Quarantine is the perfect time to spend your day learning something new, from anywhere!</string>
+    <string name="onboarding_next">Next</string>
+    <string name="onboarding_let_start">Let’s Start</string>
+    <string name="onboarding_skip">Skip</string>
+
     <!-- Login -->
     <string name="login_giris_yap">Giriş yap</string>
     <string name="login_sosyal_medya_ile_giris_yap">Sosyal Medya İle Giriş Yap</string>

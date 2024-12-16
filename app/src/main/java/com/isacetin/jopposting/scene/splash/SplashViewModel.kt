@@ -12,20 +12,27 @@ import javax.inject.Inject
 @HiltViewModel
 class SplashViewModel @Inject constructor(private val userPreference: UserPreference) : ViewModel() {
     val isLogged = mutableStateOf<Boolean?>(null)
+    val isFirstLaunch = mutableStateOf(false)
 
     init {
         checkLoggedIn()
+        checkFirstLogin()
     }
 
     private fun checkLoggedIn() {
         viewModelScope.launch {
             userPreference.token().collect { token ->
-                if (token.isNotBlank()) {
-                    delay(5000L)
-                    isLogged.value = true
-                } else {
-                    isLogged.value = false
-                }
+                delay(2500L)
+                isLogged.value = token.isNotBlank()
+            }
+        }
+    }
+
+    private fun checkFirstLogin() {
+        viewModelScope.launch {
+            userPreference.isFirstLaunch().collect { result ->
+                delay(2500L)
+                isFirstLaunch.value = result
             }
         }
     }

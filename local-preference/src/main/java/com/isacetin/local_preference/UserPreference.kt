@@ -6,4 +6,8 @@ interface UserPreference {
     fun token(): Flow<String>
 
     suspend fun saveToken(token: String)
+
+    fun isFirstLaunch(): Flow<Boolean>
+
+    suspend fun saveFirstLaunch()
 }

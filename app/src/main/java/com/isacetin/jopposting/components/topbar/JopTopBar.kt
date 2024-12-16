@@ -41,9 +41,10 @@ fun JopTopBar(
         },
         actions = { },
         windowInsets = TopAppBarDefaults.windowInsets,
-        colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-            containerColor = Color.Transparent
-        ),
+        colors =
+            TopAppBarDefaults.centerAlignedTopAppBarColors(
+                containerColor = Color.Transparent
+            ),
         scrollBehavior = null
     )
 }

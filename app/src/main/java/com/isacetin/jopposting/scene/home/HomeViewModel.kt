@@ -16,7 +16,6 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@Suppress("ktlint:standard:backing-property-naming")
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val repository: AuthRepository) : BaseViewModel() {
     private val _uiState = MutableStateFlow<UiState>(UiState.Empty)
